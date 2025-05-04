@@ -21,7 +21,11 @@ export const register = async (req, res) => {
     const userSaved = await newUser.save();
     const token = await createAccessToken({ id: userSaved._id });
 
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+    });
     res.json({
       id: userSaved._id,
       username: userSaved.username,
@@ -33,6 +37,7 @@ export const register = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -49,7 +54,11 @@ export const login = async (req, res) => {
 
     const token = await createAccessToken({ id: userFound._id });
 
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+    });
     res.json({
       id: userFound._id,
       username: userFound.username,
