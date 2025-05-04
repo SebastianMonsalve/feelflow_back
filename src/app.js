@@ -6,10 +6,10 @@ import authRoutes from "./routes/users.routes.js";
 const app = express();
 
 app.use(
-  cors()
-  //   {
-  //   origin: ["http://localhost:5173", "https://feelflow-front.vercel.app/"],
-  // }
+  cors({
+    origin: ["http://localhost:5173", "https://feelflow-front.vercel.app"],
+    credentials: true,
+  })
 );
 app.use(express.json());
 app.use(cookieParser());
