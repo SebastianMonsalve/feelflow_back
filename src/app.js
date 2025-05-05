@@ -8,8 +8,11 @@ const app = express();
 
 app.use(
   cors({
+    // origin: ["http://localhost:5173", "https://feelflow-front.vercel.app"],
     origin: [FRONTEND_URL_LOCAL, FRONTEND_URL_PRODUCTION],
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 app.use(express.json());
